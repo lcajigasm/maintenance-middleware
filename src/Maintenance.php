@@ -22,7 +22,7 @@ Class Maintenance
 		$uri = $request->getUri();
 		$path = $uri->getPath();
 
-		// Si el modo de mantenimiento está activado globalmente
+		// If global maintenance mode is enabled
 		if($this->maintenanceMode)
 		{
 			$response
@@ -32,7 +32,7 @@ Class Maintenance
 			return $response;
 		}
 
-		// Si hay páginas específicas en mantenimiento, verificar si la ruta actual está en la lista
+		// If there are specific pages in maintenance mode, check if current route is in the list
 		if(!empty($this->specificPages) && $this->isPageInMaintenance($path))
 		{
 			$response
@@ -46,31 +46,31 @@ Class Maintenance
 	}
 
 	/**
-	 * Verifica si la página actual está en la lista de páginas en mantenimiento
-	 * @param string $currentPath La ruta actual de la request
+	 * Checks if the current page is in the maintenance pages list
+	 * @param string $currentPath The current request path
 	 * @return bool
 	 */
 	protected function isPageInMaintenance($currentPath)
 	{
 		foreach($this->specificPages as $page)
 		{
-			// Normalizar las rutas removiendo barras finales
+			// Normalize routes by removing trailing slashes
 			$normalizedCurrentPath = rtrim($currentPath, '/');
 			$normalizedPage = rtrim($page, '/');
 			
-			// Si están vacías ambas, es la página de inicio
+			// If both are empty, it's the home page
 			if(empty($normalizedCurrentPath) && empty($normalizedPage))
 			{
 				return true;
 			}
 			
-			// Comparación exacta
+			// Exact comparison
 			if($normalizedCurrentPath === $normalizedPage)
 			{
 				return true;
 			}
 			
-			// Verificar si es un patrón con wildcard
+			// Check if it's a wildcard pattern
 			if(strpos($page, '*') !== false)
 			{
 				$pattern = str_replace('*', '.*', preg_quote($page, '/'));

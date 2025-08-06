@@ -4,14 +4,13 @@
     "keywords": [
         "maintenance", "middleware"
     ],
-    "homepage": "https://github.com/luisinder/maintenance-middleware",
+    "homepage": "https://github.com/lcajigasm/maintenance-middleware",
     "type": "library",
     "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Luis Cajigas",
-            "email": "luic87@gmail.com",
-            "homepage": "https://github.com/luisinder"
+            "homepage": "https://github.com/lcajigasm"
         }
     ],
     "require": {
